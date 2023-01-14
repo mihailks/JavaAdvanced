@@ -9,12 +9,17 @@ public class P04MatchingBrackets {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] input = scanner.nextLine().split(" ");
-        Deque<String> stack = new ArrayDeque<>();
+        String input = scanner.nextLine();
+        Deque<Integer> indexes = new ArrayDeque<>();
 
-        stack.addAll(List.of(input));
-
-
-
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '(') {
+                indexes.push(i);
+            } else if (input.charAt(i) == ')') {
+                int indexOpenBracket = indexes.pop();
+                String printStr = input.substring(indexOpenBracket, i + 1);
+                System.out.println(printStr);
+            }
+        }
     }
 }
