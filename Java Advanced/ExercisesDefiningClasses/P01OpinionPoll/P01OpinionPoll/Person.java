@@ -8,6 +8,10 @@ public class Person {
         this.age = age;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -19,4 +23,5 @@ public class Person {
     public String toString() {
         return String.format("%s - %d", this.name, this.age);
     }
+
 }
