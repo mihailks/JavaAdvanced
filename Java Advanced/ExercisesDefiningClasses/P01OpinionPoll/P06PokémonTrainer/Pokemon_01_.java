@@ -1,31 +1,28 @@
 package ExercisesDefiningClasses.P01OpinionPoll.P06PokémonTrainer;
 
-public class Pokemon {
+public class Pokemon_01_ {
     private String pokemonName;
     private String element;
     private int health;
 
-    public Pokemon(String pokemonName, String element, int health) {
+    public Pokemon_01_(String pokemonName, String element, int health) {
         this.pokemonName = pokemonName;
         this.element = element;
         this.health = health;
     }
 
-    public String getPokemonName() {
+    public String getName() {
         return pokemonName;
     }
 
-    public void setPokemonName(String pokemonName) {
-        this.pokemonName = pokemonName;
+    public void setName(String name) {
+        this.pokemonName = name;
     }
 
     public String getElement() {
         return element;
     }
 
-    public void setElement(String element) {
-        this.element = element;
-    }
 
     public int getHealth() {
         return health;

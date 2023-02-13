@@ -1,8 +1,7 @@
 package ExercisesDefiningClasses.P01OpinionPoll.P06PokémonTrainer;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     private static final String END_COMMAND_POKEMON = "Tournament";
@@ -11,24 +10,39 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Map<Trainer, Pokemon> trainersMap = new HashMap<>();
+        Map<String, List<Pokemon_01_>> pokemonByTrainer = new LinkedHashMap<>();
         String input = scanner.nextLine();
 
         while (!input.equals(END_COMMAND_POKEMON)) {
-            String[] currentInput = scanner.nextLine().split(" ");
-            Trainer trainer = new Trainer(currentInput[0]);
+            String[] currentInput = input.split(" ");
 
             String pokemonName = currentInput[1];
             String pokemonElement = currentInput[2];
             int pokemonHealth = Integer.parseInt(currentInput[3]);
 
-            Pokemon pokemon = new Pokemon(pokemonName,pokemonElement,pokemonHealth);
+            Pokemon_01_ pokemon = new Pokemon_01_(pokemonName, pokemonElement, pokemonHealth);
 
-            trainer.setPokemonList(pokemon);
+            pokemonByTrainer.putIfAbsent(currentInput[0], new ArrayList());
+            pokemonByTrainer.get(currentInput[0]).add(pokemon);
 
             input = scanner.nextLine();
         }
-        System.out.println();
 
+        List<Trainer> trainerList = pokemonByTrainer.entrySet()
+                .stream()
+                .map(t -> new Trainer(t.getKey(), t.getValue()))
+                .collect(Collectors.toList());
+
+        input = scanner.nextLine();
+        while (!input.equals(END_COMMAND_BATTLE)) {
+            for (Trainer trainer : trainerList) {
+                trainer.commandExecuting(input);
+            }
+
+            input = scanner.nextLine();
+        }
+        trainerList.stream()
+                .sorted(Comparator.comparingInt(Trainer::getBadges).reversed())
+                .forEach(System.out::println);
     }
 }
