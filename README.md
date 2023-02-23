@@ -1,2 +1,0 @@
-# JavaAdvanced
-Java Advanced SoftUni
