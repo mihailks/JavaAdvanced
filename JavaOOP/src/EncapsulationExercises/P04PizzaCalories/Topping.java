@@ -11,6 +11,10 @@ public class Topping {
         ToppingsModifiers(double modifier) {
             this.modifier = modifier;
         }
+
+        public double getModifier() {
+            return modifier;
+        }
     }
 
     private String toppingType;
@@ -22,31 +26,38 @@ public class Topping {
     }
 
     public void setToppingType(String toppingType) {
+        boolean isFound = false;
 
         ToppingsModifiers[] toppingsModifiers = ToppingsModifiers.values();
         for (ToppingsModifiers toppingsModifier : toppingsModifiers) {
-            if (toppingsModifier.equals(toppingsModifier)){
-                this.toppingType = toppingType;
+            if (toppingsModifier.name().equals(toppingType)) {
+                isFound = true;
                 break;
             }
         }
 
-
-
+        if (isFound) {
+            this.toppingType = toppingType;
+        } else {
+            throw new IllegalArgumentException("Cannot place " + toppingType + " on top of your pizza.");
+        }
     }
 
     public void setWeight(double weight) {
 
-        ToppingsModifiers[] toppingsModifiers = ToppingsModifiers.values();
-        for (ToppingsModifiers toppingsModifier : toppingsModifiers) {
-            if (toppingsModifier.equals())
+        if (weight >= 1 && weight <= 50) {
+            this.weight = weight;
+        } else {
+            throw new IllegalArgumentException(toppingType + " weight should be in the range [1..50].");
         }
-
-
-        this.weight = weight;
     }
-    public double calculateCalories(){
-        throw new IllegalStateException("TODO");
+
+    public double calculateCalories() {
+        ToppingsModifiers currentToppingsModifier = ToppingsModifiers.valueOf(this.toppingType);
+        double currentModifier = currentToppingsModifier.getModifier();
+
+        return 2 * this.weight * currentModifier;
     }
+
 
 }

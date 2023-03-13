@@ -6,24 +6,24 @@ import java.util.List;
 public class Pizza {
     private String name;
     private Dough dough;
-    private List<Topping> toppingList;
+    private List<Topping> toppings;
 
     public Pizza(String name, int numberOfToppings) {
         setName(name);
-        setToppingList(numberOfToppings);
+        setToppings(numberOfToppings);
     }
 
     public void setName(String name) {
-        if (name.length() >= 15 || name.trim().isEmpty()) {
-            this.name = name;
-        } else {
+        if (name.trim().isEmpty() || name.length() > 15 || name.length() < 1) {
             throw new IllegalArgumentException("Pizza name should be between 1 and 15 symbols.");
+        } else {
+            this.name = name;
         }
     }
 
-    public void setToppingList(int numberOfToppings) {
+    public void setToppings(int numberOfToppings) {
         if (numberOfToppings >= 0 && numberOfToppings <= 10) {
-            this.toppingList = new ArrayList<>();
+            this.toppings = new ArrayList<>();
         } else {
             throw new IllegalArgumentException("Number of toppings should be in range [0..10].");
         }
@@ -36,10 +36,12 @@ public class Pizza {
     public String getName() {
         return name;
     }
-    public void addTopping(Topping topping){
-        throw new IllegalStateException("TODO");
+
+    public void addTopping(Topping topping) {
+        toppings.add(topping);
     }
-    public double getOverallCalories(){
-        throw new IllegalStateException("TODO");
+
+    public double getOverallCalories() {
+        return dough.calculateCalories() + toppings.stream().mapToDouble(t -> t.calculateCalories()).sum();
     }
 }

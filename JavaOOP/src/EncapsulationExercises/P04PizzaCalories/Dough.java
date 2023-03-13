@@ -1,22 +1,33 @@
 package EncapsulationExercises.P04PizzaCalories;
 
 public class Dough {
-    public enum DoughModifiers {
+    public enum FlourType {
         White(1.5),
-        Wholegrain(1.0),
-        Crispy(0.9),
-        Chewy(1.1),
-        Homemade(1.0);
+        Wholegrain(1.0);
         private final double modifier;
 
-        DoughModifiers(double modifier) {
+        FlourType(double modifier) {
             this.modifier = modifier;
         }
 
         public double getModifier() {
             return modifier;
         }
+    }
 
+    public enum BakingTechnique {
+        Crispy(0.9),
+        Chewy(1.1),
+        Homemade(1.0);
+        private final double modifier;
+
+        BakingTechnique(double modifier) {
+            this.modifier = modifier;
+        }
+
+        public double getModifier() {
+            return modifier;
+        }
     }
 
     private String flourType;
@@ -30,24 +41,34 @@ public class Dough {
     }
 
     private void setFlourType(String flourType) {
-        DoughModifiers[] types = DoughModifiers.values();
-        for (DoughModifiers type : types) {
+        boolean isFound = false;
+        FlourType[] types = FlourType.values();
+        for (FlourType type : types) {
             if (type.name().equals(flourType)) {
-                this.flourType = flourType;
-            } else {
-                throw new IllegalArgumentException("Invalid type of dough.");
+                isFound = true;
+                break;
             }
+        }
+        if (isFound) {
+            this.flourType = flourType;
+        } else {
+            throw new IllegalArgumentException("Invalid type of dough.");
         }
     }
 
     private void setBakingTechnique(String bakingTechnique) {
-        DoughModifiers[] types = DoughModifiers.values();
-        for (DoughModifiers type : types) {
-            if (type.name().equals(flourType)) {
-                this.bakingTechnique = bakingTechnique;
-            } else {
-                throw new IllegalArgumentException("Invalid type of dough.");
+        boolean isFound = false;
+        BakingTechnique[] types = BakingTechnique.values();
+        for (BakingTechnique type : types) {
+            if (type.name().equals(bakingTechnique)) {
+                isFound = true;
+                break;
             }
+        }
+        if (isFound) {
+            this.bakingTechnique = bakingTechnique;
+        } else {
+            throw new IllegalArgumentException("Invalid type of dough.");
         }
     }
 
@@ -58,8 +79,15 @@ public class Dough {
             throw new IllegalArgumentException("Dough weight should be in the range [1..200].");
         }
     }
-    public double calculateCalories(){
-        throw new IllegalStateException("TODO");
+
+    public double calculateCalories() {
+        FlourType currentFlourType = FlourType.valueOf(this.flourType);
+        double flourCalories = currentFlourType.getModifier();
+
+        BakingTechnique currentBakingTechnique = BakingTechnique.valueOf(this.bakingTechnique);
+        double bakingTechniqueCalories = currentBakingTechnique.getModifier();
+
+        return 2 * weight * flourCalories * bakingTechniqueCalories;
     }
 
 }
