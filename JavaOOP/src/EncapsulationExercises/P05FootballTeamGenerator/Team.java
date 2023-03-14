@@ -13,7 +13,10 @@ public class Team {
     }
 
     private void setName(String name) {
-        //TODO
+        if (name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("A name should not be empty.");
+        }
+        this.name = name;
     }
 
     public String getName() {
@@ -30,8 +33,14 @@ public class Team {
         }
     }
     public double getRating(){
-        //TODO
-
-        return 0;
+        double sum = 0;
+        for (Player player : players) {
+            sum+=player.overallSkillLevel();
+        }
+        if (players.size()==0){
+            return 0;
+        } else {
+            return sum/players.size();
+        }
     }
 }
