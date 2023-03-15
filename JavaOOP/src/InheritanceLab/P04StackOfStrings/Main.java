@@ -1,4 +1,4 @@
-//package InheritanceLab.P04StackOfStrings;
+package InheritanceLab.P04StackOfStrings;
 
 import java.util.ArrayList;
 import java.util.List;
