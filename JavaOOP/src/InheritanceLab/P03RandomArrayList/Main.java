@@ -15,5 +15,6 @@ public class Main {
         System.out.println(randomArrayList.getRandomElement());
         System.out.println(randomArrayList.getRandomElement());
         System.out.println(randomArrayList.getRandomElement());
+
     }
 }
