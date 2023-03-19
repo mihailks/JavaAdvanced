@@ -1,4 +1,4 @@
-package P02CarShopExtended;
+package InterfacesAndAbstractionLab.P02CarShopExtended;
 
 import java.io.Serializable;
 
@@ -9,6 +9,10 @@ public interface Car extends Serializable {
 
     String getColor();
 
-    int getHorsePower();
+    Integer getHorsePower();
+
+    String countryProduced();
+
+
 }
 

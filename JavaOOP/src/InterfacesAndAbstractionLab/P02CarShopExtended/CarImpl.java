@@ -1,14 +1,13 @@
-package InterfacesAndAbstractionLab.P01CarShop;
+package InterfacesAndAbstractionLab.P02CarShopExtended;
 
-import java.io.Serializable;
+public class CarImpl implements Car{
 
-public class Seat implements Car, Serializable {
     private String model;
     private String color;
     private Integer horsePower;
     private String countryProduced;
 
-    public Seat(String model, String color, Integer horsePower, String countryProduced) {
+    public CarImpl(String model, String color, Integer horsePower, String countryProduced) {
         this.model = model;
         this.color = color;
         this.horsePower = horsePower;
@@ -37,6 +36,9 @@ public class Seat implements Car, Serializable {
 
     @Override
     public String toString() {
-        return String.format("This is %s produced in %s and have %d tires", model, countryProduced, TIRES);
+        return String.format("This is %s produced in %s and have %d tires",
+                this.getModel(),
+                this.countryProduced(),
+                this.TIRES);
     }
 }

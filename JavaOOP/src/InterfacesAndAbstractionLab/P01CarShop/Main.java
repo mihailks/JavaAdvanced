@@ -1,7 +1,6 @@
 package InterfacesAndAbstractionLab.P01CarShop;
 
 public class Main {
-
     public static void main(String[] args) {
         Car seat = new Seat("Leon", "gray", 110, "Spain");
 
@@ -10,6 +9,6 @@ public class Main {
                 seat.getModel(),
                 seat.getColor(),
                 seat.getHorsePower()));
-        System.out.println(seat);
+        System.out.println(seat.toString());
     }
 }
