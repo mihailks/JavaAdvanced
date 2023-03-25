@@ -6,13 +6,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-    //FIXME finish the task
     public static final String CAR_NAME = "Car";
     public static final String TRUCK_NAME = "Truck";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        DecimalFormat decimalFormat = new DecimalFormat("##.###");
+        DecimalFormat decimalFormat = new DecimalFormat("###.##");
 
         String[] carInfo = scanner.nextLine().split(" ");
         String[] truckInfo = scanner.nextLine().split(" ");

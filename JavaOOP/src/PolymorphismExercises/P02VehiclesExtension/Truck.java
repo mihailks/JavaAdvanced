@@ -1,9 +1,9 @@
-package PolymorphismExercises.P01Vehicles;
+package PolymorphismExercises.P02VehiclesExtension;
 
 public class Truck extends Vehicle {
 
-    public Truck(double fuelQuantity, double consumptionPer100km) {
-        super(fuelQuantity, consumptionPer100km);
+    public Truck(double fuelQuantity, double consumptionPer100km, double tankCapacity) {
+        super(fuelQuantity, consumptionPer100km, tankCapacity);
     }
 
     protected double getSummerFuelConsumption(){
