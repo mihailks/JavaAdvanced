@@ -13,7 +13,6 @@ public abstract class BaseBooth implements Booth {
 
     private Collection<Delicacy> delicacyOrders;
     private Collection<Cocktail> cocktailOrders;
-
     private int boothNumber;
     private int capacity;
     private int numberOfPeople;
@@ -25,48 +24,57 @@ public abstract class BaseBooth implements Booth {
         delicacyOrders = new ArrayList<>();
         cocktailOrders = new ArrayList<>();
         setCapacity(capacity);
-        setNumberOfPeople(numberOfPeople);
         this.pricePerPerson = pricePerPerson;
-        isReserved = false;
+        this.isReserved = false;
+        this.boothNumber = boothNumber;
+        this.price = 0;
     }
 
     @Override
     public int getBoothNumber() {
-        return 0;
+        return this.boothNumber;
     }
 
     @Override
     public int getCapacity() {
-        return 0;
+        return this.capacity;
     }
 
     @Override
     public boolean isReserved() {
-        return false;
+        return this.isReserved;
     }
 
     @Override
     public double getPrice() {
-        return 0;
+        return this.price;
     }
 
     @Override
     public void reserve(int numberOfPeople) {
-        isReserved=true;
+        this.isReserved = true;
+        setNumberOfPeople(numberOfPeople);
+        this.price = pricePerPerson * numberOfPeople;
     }
 
     @Override
     public double getBill() {
-        return 0;
+        double boothDelicacyPrice = delicacyOrders.stream().mapToDouble(d -> d.getPrice()).sum();
+        double boothCocktailPrice = cocktailOrders.stream().mapToDouble(c -> c.getPrice()).sum();
+        return boothDelicacyPrice + boothCocktailPrice + this.price;
     }
 
     @Override
     public void clear() {
-
+        delicacyOrders = new ArrayList<>();
+        cocktailOrders = new ArrayList<>();
+        this.isReserved = false;
+        this.numberOfPeople = 0;
+        this.price = 0;
     }
 
     public void setCapacity(int capacity) {
-        if (capacity < 0) {
+        if (capacity <= 0) {
             throw new IllegalArgumentException(INVALID_TABLE_CAPACITY);
         }
         this.capacity = capacity;
