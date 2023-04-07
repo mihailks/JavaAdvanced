@@ -133,6 +133,6 @@ public class ControllerImpl implements Controller {
             sb.append(field.getInfo())
                     .append(System.lineSeparator());
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }

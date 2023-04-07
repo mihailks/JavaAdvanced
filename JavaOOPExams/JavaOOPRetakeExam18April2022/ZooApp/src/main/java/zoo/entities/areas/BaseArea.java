@@ -54,7 +54,7 @@ public abstract class BaseArea implements Area {
 
     @Override
     public void addAnimal(Animal animal) {
-        if (this.capacity >= animals.size()) {
+        if (this.capacity > animals.size()) {
             this.animals.add(animal);
         } else {
             throw new IllegalArgumentException(NOT_ENOUGH_CAPACITY);
